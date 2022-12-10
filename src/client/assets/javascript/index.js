@@ -1,7 +1,6 @@
 // PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE
 
 // The store will hold all information needed globally
-
 let store = {
   track_id: undefined,
   player_id: undefined,
@@ -76,9 +75,6 @@ async function delay(ms) {
 
 // This async function controls the flow of the race, add the logic and error handling
 async function handleCreateRace() {
-  // render starting UI
-  renderAt("#race", renderRaceStartView())
-
   // render starting UI
 
   // TODO - Get player_id and track_id from the store
@@ -229,7 +225,7 @@ function renderRacerCars(racers) {
 
   return `
 		<ul id="racers">
-			${reuslts}
+			${results}
 		</ul>
 	`
 }
