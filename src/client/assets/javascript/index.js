@@ -1,17 +1,11 @@
 // PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE
 
 // The store will hold all information needed globally
-<<<<<<< Updated upstream
-var store = {
-	track_id: undefined,
-	player_id: undefined,
-	race_id: undefined,
-=======
+
 let store = {
   track_id: undefined,
   player_id: undefined,
   race_id: undefined,
->>>>>>> Stashed changes
 }
 
 // We need our javascript to wait until the DOM is loaded
@@ -38,35 +32,6 @@ async function onPageLoad() {
 }
 
 function setupClickHandlers() {
-<<<<<<< Updated upstream
-	document.addEventListener('click', function(event) {
-		const { target } = event
-
-		// Race track form field
-		if (target.matches('.card.track')) {
-			handleSelectTrack(target)
-		}
-
-		// Podracer form field
-		if (target.matches('.card.podracer')) {
-			handleSelectPodRacer(target)
-		}
-
-		// Submit create race form
-		if (target.matches('#submit-create-race')) {
-			event.preventDefault()
-	
-			// start race
-			handleCreateRace()
-		}
-
-		// Handle acceleration click
-		if (target.matches('#gas-peddle')) {
-			handleAccelerate(target)
-		}
-
-	}, false)
-=======
   document.addEventListener(
     "click",
     function (event) {
@@ -97,7 +62,6 @@ function setupClickHandlers() {
     },
     false
   )
->>>>>>> Stashed changes
 }
 
 async function delay(ms) {
@@ -112,23 +76,9 @@ async function delay(ms) {
 
 // This async function controls the flow of the race, add the logic and error handling
 async function handleCreateRace() {
-<<<<<<< Updated upstream
-	// render starting UI
-	renderAt('#race', renderRaceStartView())
+  // render starting UI
+  renderAt("#race", renderRaceStartView())
 
-	// TODO - Get player_id and track_id from the store
-	
-	// const race = TODO - invoke the API call to create the race, then save the result
-
-	// TODO - update the store with the race id
-
-	// The race has been created, now start the countdown
-	// TODO - call the async function runCountdown
-
-	// TODO - call the async function startRace
-
-	// TODO - call the async function runRace
-=======
   // render starting UI
 
   // TODO - Get player_id and track_id from the store
@@ -136,7 +86,7 @@ async function handleCreateRace() {
   const track_id = store.track_id
 
   if (!player_id || !track_id) {
-    alert("Please select track and racer to play a game!")
+    alert("Please select track and racer first!")
     return
   }
 
@@ -162,7 +112,6 @@ async function handleCreateRace() {
   } catch (err) {
     console.log(err)
   }
->>>>>>> Stashed changes
 }
 
 async function runRace(raceID) {
@@ -405,11 +354,7 @@ function renderAt(element, html) {
 
 // API CALLS ------------------------------------------------
 
-<<<<<<< Updated upstream
-const SERVER = 'http://localhost:8000'
-=======
 const SERVER = "http://localhost:3000"
->>>>>>> Stashed changes
 
 function defaultFetchOpts() {
   return {
