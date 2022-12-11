@@ -208,7 +208,7 @@ function handleAccelerate() {
   console.log("accelerate button clicked")
   // TODO - Invoke the API call to accelerate
 
-  accelerate(store.race_id)
+  accelerate(store.race_id).catch(err => console.log(err))
 }
 
 // HTML VIEWS ------------------------------------------------

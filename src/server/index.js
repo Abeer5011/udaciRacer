@@ -13,23 +13,18 @@ let resp = JSON.parse(fs.readFileSync("./data.json"))
 const cars = resp.cars
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const arr = cars.map(car => {
+  return { ...car, final_position: 0, speed: 0, segment: 0 }
+})
 
 let state = {
   status: "unstarted",
-  positions: [
-    {
-      final_position: 0,
-      speed: 0,
-      segment: 0,
-    },
-  ],
+  positions: arr,
 }
-for (let i = 0; i < cars.length; i++) {
-  state.positions.push(cars[i])
-}
-const progressF = async (timeToDelay, positions) => {
+
+const progressF = (timeToDelay, positions) => {
   state.status = "in-progress"
-  await fetching(timeToDelay, positions).then(updateState)
+  fetching(timeToDelay, positions).then(updateState)
   console.log(state)
 }
 
