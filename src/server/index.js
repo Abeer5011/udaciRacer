@@ -30,7 +30,6 @@ const progressF = (timeToDelay, positions) => {
 
 const updateState = positions => {
   state.status = "finished"
-  // state.positions = positions
   return new Promise(resolve => {
     resolve(positions)
     console.log(state)
@@ -87,49 +86,47 @@ app.get("/api/races/:carId", (req, res) => {
   console.log(state)
 
   res.json(state)
-  progressF(100000, [
-    {
-      final_position: 0,
-      speed: 0,
-      segment: 0,
-    },
-  ])
 })
 
 app.post("/api/races/:racer/start", (req, res) => {
   res.send(req.params.racer)
+
+  progressF(30000, arr)
 })
 
 app.post("/api/races", (req, res) => {
   let { track_id, player_id } = req.body
+  try {
+    let response = JSON.parse(fs.readFileSync("./data.json"))
 
-  let response = JSON.parse(fs.readFileSync("./data.json"))
-
-  const tracks = response.tracks
-  for (let i = 0; i < tracks.length; i++) {
-    if (tracks[i].id === track_id) {
-      track_id = tracks[i]
+    const tracks = response.tracks
+    for (let i = 0; i < tracks.length; i++) {
+      if (tracks[i].id === track_id) {
+        track_id = tracks[i]
+      }
     }
-  }
-  let car = []
-  for (let i = 0; i < cars.length; i++) {
-    if (cars[i].id === player_id) {
-      player_id = cars[i].id
-    } else if (cars[i].id !== player_id) {
-      car.push(cars[i])
+    let car = []
+    for (let i = 0; i < cars.length; i++) {
+      if (cars[i].id === player_id) {
+        player_id = cars[i].id
+      } else if (cars[i].id !== player_id) {
+        car.push(cars[i])
+      }
     }
-  }
-  let body = {
-    id: 1,
-    track_id: track_id,
-    player_id: player_id,
-    cars: car,
-    results: [state],
-  }
+    let body = {
+      id: 1,
+      track_id: track_id,
+      player_id: player_id,
+      cars: car,
+      results: [state],
+    }
 
-  console.log(body)
+    console.log(body)
 
-  res.json(body)
+    res.json(body)
+  } catch (err) {
+    res.status(500).json({ msg: `Internal Server Error.` })
+  }
 })
 app.post("/api/races/:ac/accelerate", (req, res) => {
   res.send(req.params.ac)
