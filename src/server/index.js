@@ -35,8 +35,11 @@ const progressF = async (timeToDelay, positions) => {
 
 const updateState = positions => {
   state.status = "finished"
-  state.positions = positions
-  console.log(state)
+  // state.positions = positions
+  return new Promise(resolve => {
+    resolve(positions)
+    console.log(state)
+  })
 }
 
 const fetching = (timeToDelay, positions) => {
