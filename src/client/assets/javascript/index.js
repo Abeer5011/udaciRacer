@@ -90,13 +90,12 @@ async function handleCreateRace() {
   // const race = TODO - invoke the API call to create the race, then save the result
   try {
     const race = await createRace(player_id, track_id)
-    console.log(race)
 
     renderAt("#race", renderRaceStartView(race.track_id))
     // TODO - update the store with the race id
     // For the API to work properly, the race id should be race id - 1
     store.race_id = parseInt(race.id) - 1
-    console.log(store.race_id)
+
     // The race has been created, now start the countdown
     // TODO - call the async function runCountdown
     await runCountdown()
@@ -153,11 +152,11 @@ async function runCountdown() {
       // run this DOM manipulation to decrement the countdown for the user
 
       // TODO - if the countdown is done, clear the interval, resolve the promise, and return
-      const s = setInterval(() => {
+      const time = setInterval(() => {
         if (timer != 0) {
           document.getElementById("big-numbers").innerHTML = --timer
         } else {
-          clearInterval(s)
+          clearInterval(time)
           resolve()
         }
       }, 1000)
@@ -182,8 +181,6 @@ function handleSelectPodRacer(target) {
   // TODO - save the selected racer to the store
 
   store.player_id = parseInt(target.id)
-
-  console.log(store.player_id)
 }
 
 function handleSelectTrack(target) {
@@ -200,8 +197,6 @@ function handleSelectTrack(target) {
   // TODO - save the selected track id to the store
 
   store.track_id = parseInt(target.id)
-
-  console.log(store.track_id)
 }
 
 function handleAccelerate() {
@@ -312,7 +307,6 @@ function resultsView(positions) {
 
 function raceProgress(positions) {
   let userPlayer = positions.find(e => e.id === store.player_id)
-  console.log(userPlayer)
 
   userPlayer.driver_name += " (you)"
 

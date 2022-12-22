@@ -25,14 +25,12 @@ let state = {
 const progressF = (timeToDelay, positions) => {
   state.status = "in-progress"
   fetching(timeToDelay, positions).then(updateState)
-  console.log(state)
 }
 
 const updateState = positions => {
   state.status = "finished"
   return new Promise(resolve => {
     resolve(positions)
-    console.log(state)
   })
 }
 
@@ -83,8 +81,6 @@ app.get("/api/tracks", (req, res) => {
 })
 
 app.get("/api/races/:carId", (req, res) => {
-  console.log(state)
-
   res.json(state)
 })
 
@@ -120,8 +116,6 @@ app.post("/api/races", (req, res) => {
       cars: car,
       results: [state],
     }
-
-    console.log(body)
 
     res.json(body)
   } catch (err) {
